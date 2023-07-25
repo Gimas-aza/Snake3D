@@ -10,7 +10,7 @@ public abstract class State : MonoBehaviour
     
     public void Enter(Snake target)
     {
-        if (enabled == false)
+        if (!enabled)
         {
             Target = target;
             enabled = true;
@@ -24,7 +24,7 @@ public abstract class State : MonoBehaviour
 
     public void Exit()
     {
-        if (enabled == true)
+        if (enabled)
         {
             foreach (Transition transition in _transitions)
                 transition.enabled = false;
