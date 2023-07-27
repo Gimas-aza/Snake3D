@@ -128,6 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _effect: {fileID: 0}
-  _damage: 1
+  _damage: 5
   _speed: 11.77
   _timeLife: 2

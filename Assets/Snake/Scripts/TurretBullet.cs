@@ -11,7 +11,7 @@ public class TurretBullet : MonoBehaviour
     [SerializeField] private float _speed = 50;
     [SerializeField] private float _timeLife;
     
-    private Vector3 _target;
+    private Transform _target;
     private Rigidbody _rigidbody;
     private float _countTime;
 
@@ -31,13 +31,13 @@ public class TurretBullet : MonoBehaviour
         _countTime -= Time.deltaTime;
     }
 
-    public void ShotBullet(Vector3 target)
+    public void ShotBullet(Transform target)
     {
         _rigidbody = GetComponent<Rigidbody>();
         _target = target;
         _countTime = _timeLife;
 
-        Vector3 direction = _target;
+        Vector3 direction = _target.position - transform.position;
         Debug.Log(direction * _speed);
 
         _rigidbody.isKinematic = false;
@@ -48,10 +48,10 @@ public class TurretBullet : MonoBehaviour
     {
         if(other.TryGetComponent(out Enemy enemy))
         {
-            _rigidbody.isKinematic = true;
-            gameObject.SetActive(false);
             enemy.TakeDamage(_damage);
             // Instantiate(_effect, transform.position, Quaternion.identity);
         }
+        _rigidbody.isKinematic = true;
+        gameObject.SetActive(false);
     }
 }

@@ -8,6 +8,7 @@ public class SnakeTail : MonoBehaviour
     [SerializeField] private int _gap;
     [SerializeField] private GameObject _bodyPrefab;
     [SerializeField] private Transform _spawnBody;
+    [SerializeField] private Transform _containerBody;
 
     private List<GameObject> _bodyParts = new List<GameObject>();
     private List<Vector3> _positionsHistory = new List<Vector3>();
@@ -20,7 +21,7 @@ public class SnakeTail : MonoBehaviour
         AddBlock();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MoveTail();
         LimitPositionHistory();
@@ -36,7 +37,7 @@ public class SnakeTail : MonoBehaviour
             Vector3 point = _positionsHistory[Mathf.Clamp(index * _gap, 0, _positionsHistory.Count - 1)];
 
             Vector3 moveDirection = point - body.transform.position;
-            body.transform.position += moveDirection * _bodySpeed * Time.deltaTime;
+            body.transform.position += moveDirection * _bodySpeed * Time.fixedDeltaTime;
 
             body.transform.LookAt(point);
 
@@ -54,7 +55,7 @@ public class SnakeTail : MonoBehaviour
 
     public void AddBlock()
     {
-        GameObject body = Instantiate(_bodyPrefab);
+        GameObject body = Instantiate(_bodyPrefab, _containerBody);
         _bodyParts.Add(body);
     }
 

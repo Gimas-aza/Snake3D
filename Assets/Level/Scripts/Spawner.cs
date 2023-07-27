@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
     [SerializeField] private Snake _snake;
     [SerializeField] private Transform _containerEnemys;
 
+    private List<Enemy> _enemies;
+
     private void Update()
     {
         if (_spawns.Count == 0)
@@ -26,6 +28,7 @@ public class Spawner : MonoBehaviour
         {
             Enemy enemy = Instantiate(spawn.EnemyPrefab, spawn.SpawnPointEnemy.position, Quaternion.identity, _containerEnemys);
             enemy.Init(_snake);
+            // _enemies.Add(enemy);
         }
         spawn.TriggerSnake.Included = false;
         spawn.TriggerSnake.gameObject.SetActive(false);

@@ -62,7 +62,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.3
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -86,7 +86,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba9b654dbf0ff44b83ad9984ebe3423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
   _effect: {fileID: 0}
   _health: 20
   _healthText: {fileID: 0}
@@ -130,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 7917122803238459318}
-  _transitionRange: 1.9
+  _transitionRange: 1.5
 --- !u!114 &7917122803238459318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,7 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _transitions: []
   _damage: 10
-  _radius: 0.68
+  _radius: 3
+  _delayAttack: 1.5
 --- !u!1 &7917122803985456704
 GameObject:
   m_ObjectHideFlags: 0

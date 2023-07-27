@@ -9,14 +9,15 @@ public class TurretMove : MonoBehaviour
     [SerializeField] private TurretBullet _bullet;
     [Space(5)]
     [SerializeField] private float _numderOfBullet = 50;
-    [SerializeField] private Transform _containerBullet;
     [SerializeField] private float _range = 15;
     [SerializeField] private float _rotationSpeed = 3;
     [SerializeField] private float _fireRate = 1;
 
     private List<TurretBullet> _bulletList = new();
+    private Transform _containerBullet;
     private int _currentBullet = 0;
-    private Vector3 _target;
+    private Vector3 _startPositionHead = Vector3.zero;
+    private Transform _target;
     private float _shortestDistance;
     private Enemy _nearestEnemy;
     private float _countdown;
@@ -25,7 +26,7 @@ public class TurretMove : MonoBehaviour
     {
         for (int i = 0; i < _numderOfBullet; i++)
         {
-            TurretBullet bullet = Instantiate(_bullet, _containerBullet);
+            TurretBullet bullet = Instantiate(_bullet);
             bullet.gameObject.SetActive(false);
             _bulletList.Add(bullet);
         }
@@ -37,8 +38,12 @@ public class TurretMove : MonoBehaviour
 
         if(_nearestEnemy != null && _shortestDistance <= _range)
         {
-            RotationHead();
+            RotationHead(_nearestEnemy.transform);
             Shot();
+        }
+        else
+        {
+            RotationHead(_startPositionHead);
         }
     }
 
@@ -59,13 +64,19 @@ public class TurretMove : MonoBehaviour
         }
     }
 
-    private void RotationHead()
+    private void RotationHead(Transform target)
     {
-        _target = _nearestEnemy.transform.position - new Vector3(0, 0.5f, 0);
-        Vector3 direction = _target - new Vector3(0, 0.5f, 0);
+        _target = target;
+        Vector3 direction = _target.position - transform.position;
         Quaternion look = Quaternion.LookRotation(direction);
         Vector3 rotation = Quaternion.Lerp(_head.rotation, look, _rotationSpeed * Time.deltaTime).eulerAngles;       
         _head.rotation = Quaternion.Euler(rotation.x, rotation.y, 0);
+    }
+
+    private void RotationHead(Vector3 target)
+    {
+        Vector3 rotation = Vector3.Lerp(_head.localEulerAngles, target, (_rotationSpeed - 2) * Time.deltaTime);       
+        _head.localRotation = Quaternion.Euler(rotation.x, rotation.y, 0);
     }
 
     private void Shot()

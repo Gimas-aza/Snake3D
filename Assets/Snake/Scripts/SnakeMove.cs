@@ -6,7 +6,7 @@ public class SnakeMove : MonoBehaviour {
     [SerializeField] private float _moveSpeed = 5;
     [SerializeField] private float _steerSpeed = 180;
 
-    void Update() {
+    void FixedUpdate() {
 
         MoveForward();
         SetTurnMove();
@@ -14,12 +14,12 @@ public class SnakeMove : MonoBehaviour {
 
     void MoveForward() 
     {
-        transform.position += transform.forward * _moveSpeed * Time.deltaTime;
+        transform.position += transform.forward * _moveSpeed * Time.fixedDeltaTime;
     }
 
     void SetTurnMove() 
     {
         float steerDirection = Input.GetAxis("Horizontal");
-        transform.Rotate(Vector3.up * steerDirection * _steerSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.up * steerDirection * _steerSpeed * Time.fixedDeltaTime);
     }
 }
