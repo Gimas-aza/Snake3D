@@ -38,7 +38,6 @@ public class TurretBullet : MonoBehaviour
         _countTime = _timeLife;
 
         Vector3 direction = _target.position - transform.position;
-        Debug.Log(direction * _speed);
 
         _rigidbody.isKinematic = false;
         _rigidbody.AddForce(direction * _speed, ForceMode.Impulse);
