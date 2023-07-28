@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,11 +21,16 @@ public class TurretMove : MonoBehaviour
     private Enemy _nearestEnemy;
     private float _countdown;
 
+    public void Init(Transform containerBullet)
+    {
+        _containerBullet = containerBullet;
+    }
+
     private void Start()
     {
         for (int i = 0; i < _numderOfBullet; i++)
         {
-            TurretBullet bullet = Instantiate(_bullet);
+            TurretBullet bullet = Instantiate(_bullet, _containerBullet);
             bullet.gameObject.SetActive(false);
             _bulletList.Add(bullet);
         }

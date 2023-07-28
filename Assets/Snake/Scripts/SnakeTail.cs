@@ -1,17 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class SnakeTail : MonoBehaviour
 {
-    [SerializeField] private float _bodySpeed = 5;
+    [SerializeField] private float _bodySpeed;
     [SerializeField] private int _gap;
-    [SerializeField] private GameObject _bodyPrefab;
+    [SerializeField] private SnakeBody _bodyPrefab;
     [SerializeField] private Transform _spawnBody;
-    [SerializeField] private Transform _containerBody;
 
-    private List<GameObject> _bodyParts = new List<GameObject>();
-    private List<Vector3> _positionsHistory = new List<Vector3>();
+    private Transform _containerBody;
+    private Transform _containerBullet;
+    private List<SnakeBody> _bodyParts = new();
+    private List<Vector3> _positionsHistory = new();
+
+    [Inject]
+    private void Construct(Containers containers)
+    {
+        _containerBody = containers.ContainerSnakeTail.transform;
+        _containerBullet = containers.ContainerBullet.transform;
+    }
 
     private void Start()
     {
@@ -55,7 +64,8 @@ public class SnakeTail : MonoBehaviour
 
     public void AddBlock()
     {
-        GameObject body = Instantiate(_bodyPrefab, _containerBody);
+        SnakeBody body = Instantiate(_bodyPrefab, _containerBody);
+        body.Turret.Init(_containerBullet);
         _bodyParts.Add(body);
     }
 
