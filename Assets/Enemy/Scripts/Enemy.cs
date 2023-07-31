@@ -9,12 +9,15 @@ public class Enemy : MonoBehaviour
     [Space(5)]
 
     private Snake _target;
+    private Statistic _statistic;
 
     public Snake Target => _target;
+    public Statistic Statistic => _statistic;
 
-    public void Init(Snake target)
+    public void Init(Snake target, Statistic statistic)
     {
         _target = target;
+        _statistic = statistic;
     }
 
     public void TakeDamage(int damage)
@@ -23,7 +26,7 @@ public class Enemy : MonoBehaviour
         if(_health <= 0)
         {
             // Instantiate(_effect, transform.position, Quaternion.identity);
-            Debug.Log("Die");
+            _statistic.AddDiedEnemy();
             Destroy(gameObject);
         }
     }

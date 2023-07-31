@@ -7,15 +7,16 @@ public class BootstrapInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        BindStatistic();
+        BindUI();
         BindContainers();
+        BindStatistic();
     }
 
-    private void BindStatistic()
+    private void BindUI()
     {
         Container
-            .Bind<Statistic>()
-            .FromNew()
+            .Bind<UI>()
+            .FromComponentInHierarchy()
             .AsSingle()
             .NonLazy();
     }
@@ -25,6 +26,15 @@ public class BootstrapInstaller : MonoInstaller
         Container
             .Bind<Containers>()
             .FromComponentInNewPrefab(_containers)
+            .AsSingle()
+            .NonLazy();
+    }
+
+    private void BindStatistic()
+    {
+        Container
+            .Bind<Statistic>()
+            .FromNew()
             .AsSingle()
             .NonLazy();
     }

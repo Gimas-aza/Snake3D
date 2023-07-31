@@ -8,8 +8,11 @@ public class BlastAttackState : State
     [SerializeField] private float _radius;
     [SerializeField] private float _delayAttack;
 
+    private Statistic _statistic;
+
     private void Start()
     {
+        _statistic = GetComponent<Enemy>().Statistic;
         Invoke(nameof(TryAttack), _delayAttack);  
     }
 
@@ -19,6 +22,7 @@ public class BlastAttackState : State
             Target.TakeDamage(_damage);
         
         Debug.Log("Burst");
+        _statistic.AddDiedEnemy();
         Destroy(gameObject);
     }
 

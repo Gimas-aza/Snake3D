@@ -1,25 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UIElements;
+using Zenject;
 
 public class SnakeMove : MonoBehaviour {
-    [SerializeField] private float _moveSpeed = 5;
-    [SerializeField] private float _steerSpeed = 180;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _steerSpeed;
+    [SerializeField] private float _smoothClick;
 
-    void FixedUpdate() {
+    private UI _ui;
+
+    [Inject]
+    private void Construct(UI ui)
+    {
+        _ui = ui;
+    }
+
+    private void Start()
+    {
+    }
+
+    private void FixedUpdate() {
 
         MoveForward();
         SetTurnMove();
     }
 
-    void MoveForward() 
+    private void OnButtonUp(PointerUpEvent evt)
+    {
+        Debug.Log("ButtonUp");
+    }
+
+    private void MoveForward() 
     {
         transform.position += transform.forward * _moveSpeed * Time.fixedDeltaTime;
     }
 
-    void SetTurnMove() 
+    private void SetTurnMove() 
     {
-        float steerDirection = Input.GetAxis("Horizontal");
+        float steerDirection = 0;
+
+        if (_ui.Horizontal == 0)
+            steerDirection = Input.GetAxis("Horizontal");
+        else
+            steerDirection = Mathf.Lerp(steerDirection, _ui.Horizontal, Time.fixedDeltaTime * _smoothClick);
+
         transform.Rotate(Vector3.up * steerDirection * _steerSpeed * Time.fixedDeltaTime);
     }
 }

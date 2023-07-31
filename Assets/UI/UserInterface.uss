@@ -1,0 +1,11 @@
+.BackgroundInterface {
+    background-color: rgba(0, 9, 88, 0.55);
+}
+
+.FonHeader {
+    background-color: rgba(217, 217, 217, 0.65);
+}
+
+.Fon {
+    background-color: rgba(217, 217, 217, 0.5);
+}

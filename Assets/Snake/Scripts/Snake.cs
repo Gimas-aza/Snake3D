@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Snake : MonoBehaviour
 {
@@ -9,10 +8,18 @@ public class Snake : MonoBehaviour
     [SerializeField] private int _healthMax;
 
     private int _health;
+    private UI _ui;
+
+    [Inject]
+    private void Construct(UI ui)
+    {
+        _ui = ui;
+    }
 
     private void Start()
     {
         _health = _healthMax;
+        _ui.SetHealthBar(_health);
     }
 
     public void TakeDamage(int damage)
@@ -21,12 +28,16 @@ public class Snake : MonoBehaviour
         if(_health <= 0)
         {
             // Instantiate(_effect, transform.position, Quaternion.identity);
+            _health = 0;
             gameObject.SetActive(false);
         }
+
+        _ui.SetHealthBar(_health);
     }
 
     public void RecoverHealth()
     {
         _health = _healthMax;
+        _ui.SetHealthBar(_health);
     } 
 }
