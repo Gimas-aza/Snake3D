@@ -36,9 +36,10 @@ public class TurretBullet : MonoBehaviour
         _countTime = _timeLife;
 
         Vector3 direction = _target.position - transform.position;
+        transform.forward = direction.normalized;
 
         _rigidbody.isKinematic = false;
-        _rigidbody.AddForce(direction * _speed, ForceMode.Impulse);
+        _rigidbody.AddForce(direction.normalized * _speed, ForceMode.Impulse);
     }
 
     private void OnTriggerEnter(Collider other)

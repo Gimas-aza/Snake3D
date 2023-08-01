@@ -15,8 +15,8 @@
             </ui:GroupBox>
         </ui:GroupBox>
     </ui:VisualElement>
-    <ui:VisualElement name="BlockStatistics" style="position: relative; top: auto; height: 367px; align-items: center;">
-        <ui:VisualElement name="Statistics" class="BackgroundInterface" style="width: 836px; height: 100%; align-items: center; justify-content: space-between; padding-bottom: 26px;">
+    <ui:VisualElement name="BlockStatistics" style="position: relative; top: auto; height: 450px; align-items: center; min-height: auto;">
+        <ui:VisualElement name="Statistics" class="BackgroundInterface" style="width: 836px; height: 100%; align-items: center; justify-content: space-between; padding-bottom: 20px; min-height: auto;">
             <ui:Label text="Статистика" display-tooltip-when-elided="true" name="TextStatistics" style="-unity-text-align: middle-center; height: 70px; font-size: 48px; -unity-font-style: bold; color: rgb(217, 217, 217);" />
             <ui:GroupBox name="Item1" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; height: 112.35px; width: 740px; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; overflow: hidden;">
                 <ui:VisualElement name="Header" class="FonHeader" style="height: 75px; border-top-left-radius: 50px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-top-right-radius: 50px;">
@@ -34,6 +34,7 @@
                     <ui:Label text="0/0" display-tooltip-when-elided="true" name="KilledEnemies" style="height: 100%; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-items: center; justify-content: center; display: flex; visibility: visible; overflow: visible; -unity-text-align: middle-center; font-size: 30px; color: rgb(0, 9, 88); -unity-font-style: normal; -unity-font: none; -unity-text-outline-width: 0; text-shadow: 0 0 0 rgb(0, 0, 0);" />
                 </ui:VisualElement>
             </ui:GroupBox>
+            <ui:Label text="Уровень пройден" display-tooltip-when-elided="true" name="TextLevelPassed" style="-unity-text-align: middle-center; height: 75px; width: auto; font-size: 48px; color: rgb(217, 217, 217); -unity-font-style: bold;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
