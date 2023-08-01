@@ -6,9 +6,9 @@ public abstract class State : MonoBehaviour
 {
     [SerializeField] private List<Transition> _transitions;
 
-    protected Snake Target { get; private set; }
+    protected Character Target { get; private set; }
     
-    public void Enter(Snake target)
+    public void Enter(Character target)
     {
         if (!enabled)
         {

@@ -6,11 +6,11 @@ public abstract class Transition : MonoBehaviour
 {
     [SerializeField] private State _targetState;
 
-    protected Snake Target { get; private set; }
+    protected Character Target { get; private set; }
     public State TargetState => _targetState;
     public bool NeedTransit { get; protected set; }
 
-    public void Init(Snake target)
+    public void Init(Character target)
     {
         Target = target;
     }

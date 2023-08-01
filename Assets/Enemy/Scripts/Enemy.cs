@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
     [SerializeField] private GameObject _effect;
     [Space(5)]
@@ -8,19 +8,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] private TextMesh _healthText;
     [Space(5)]
 
-    private Snake _target;
+    private StateMachine _stateMachine;
     private Statistic _statistic;
 
-    public Snake Target => _target;
     public Statistic Statistic => _statistic;
 
     public void Init(Snake target, Statistic statistic)
     {
-        _target = target;
         _statistic = statistic;
+        _stateMachine = GetComponent<StateMachine>();
+        _stateMachine.Init(target);
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         _health -= damage;
         if(_health <= 0)

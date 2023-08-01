@@ -1,21 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Enemy))]
-public class EnemyStateMachine : MonoBehaviour
+public class StateMachine : MonoBehaviour
 {
     [SerializeField] private State _firstState;
 
-    private Snake _target;
+    private Character _target;
     private State _currentState;
 
     public State CurrentState => _currentState;
 
+    public void Init(Character target)
+    {
+        _target = target;
+    }
+
     private void Start()
     {
-        _target = GetComponent<Enemy>().Target;
         Reset(_firstState);
     }
 

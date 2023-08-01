@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class Snake : MonoBehaviour
+public class Snake : Character
 {
     [SerializeField] private GameObject _effect;
     [Space(5)]
@@ -22,7 +22,7 @@ public class Snake : MonoBehaviour
         _ui.SetHealthBar(_health);
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         _health -= damage;
         if(_health <= 0)

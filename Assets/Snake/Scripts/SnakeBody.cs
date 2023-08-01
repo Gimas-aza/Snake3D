@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class SnakeBody : MonoBehaviour
 {
-    public TurretMove Turret;
+    public Turret Turret;
 }
