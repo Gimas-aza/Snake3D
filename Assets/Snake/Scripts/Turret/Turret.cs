@@ -19,11 +19,12 @@ public class Turret : MonoBehaviour
     private Head _head;
     private Attack _attack;
 
-    public void Init(Transform containerBullet)
+    public void Init(Transform containerBullet, Spawner spawner)
     {
         _containerBullet = containerBullet;
         _head = GetComponent<Head>();
         _attack = GetComponent<Attack>();
+        spawner.SpawnEnemy += OnSetEnemiesList;
     }
 
     private void Start()
@@ -51,18 +52,24 @@ public class Turret : MonoBehaviour
         }
     }
 
-    public void FindEnemies()
+    public void OnSetEnemiesList(List<Enemy> enemies)
     {
-        _enemies = FindObjectsOfType<Enemy>().ToList();
+        _enemies = enemies;
     }
 
     private void FindNearestEnemy()
     {
-        FindEnemies();
+        if (_enemies.Count == 0) return;
         _shortestDistance = Mathf.Infinity;
 
         foreach(Enemy enemy in _enemies)
         {
+            if (enemy == null)
+            {
+                _enemies.Remove(enemy);
+                continue;
+            }
+
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
 
             if(distance < _shortestDistance)

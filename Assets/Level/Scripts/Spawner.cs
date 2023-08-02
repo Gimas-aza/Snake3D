@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 public class Spawner : MonoBehaviour
@@ -8,9 +9,12 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<SpawnBonus> _spawnsBonus;
     [SerializeField] private Snake _snake;
 
+    private List<Enemy> _enemies = new();
     private Transform _containerEnemies;
     private Transform _containerBonus;
     private Statistic _statistic;
+
+    public UnityAction<List<Enemy>> SpawnEnemy;
 
     [Inject]
     private void Construct(Statistic statistic, Containers containers)
@@ -53,9 +57,11 @@ public class Spawner : MonoBehaviour
 
             Enemy enemy = Instantiate(prefab, spawn.SpawnPoint.position, Quaternion.identity, _containerEnemies);
             enemy.Init(_snake, _statistic);
+            _enemies.Add(enemy);
         }
         spawn.TriggerSnake.Included = false;
         spawn.TriggerSnake.gameObject.SetActive(false);
+        SpawnEnemy?.Invoke(_enemies);
     }
 
     private void Spawn(SpawnBonus spawn)

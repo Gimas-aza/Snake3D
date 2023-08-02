@@ -12,22 +12,16 @@ public class SnakeTail : MonoBehaviour
 
     private Transform _containerBody;
     private Transform _containerBullet;
+    private Spawner _spawner;
     private List<SnakeBody> _bodyParts = new();
     private List<Vector3> _positionsHistory = new();
 
     [Inject]
-    private void Construct(Containers containers)
+    private void Construct(Containers containers, Spawner spawner)
     {
         _containerBody = containers.ContainerSnakeTail.transform;
         _containerBullet = containers.ContainerBullet.transform;
-    }
-
-    private void Start()
-    {
-        AddBlock();
-        AddBlock();
-        AddBlock();
-        AddBlock();
+        _spawner = spawner;
     }
 
     private void FixedUpdate()
@@ -65,7 +59,7 @@ public class SnakeTail : MonoBehaviour
     public void AddBlock()
     {
         SnakeBody body = Instantiate(_bodyPrefab, _containerBody);
-        body.Turret.Init(_containerBullet);
+        body.Turret.Init(_containerBullet, _spawner);
         _bodyParts.Add(body);
     }
 

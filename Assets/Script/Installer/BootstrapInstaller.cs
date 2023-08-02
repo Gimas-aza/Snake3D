@@ -10,6 +10,7 @@ public class BootstrapInstaller : MonoInstaller
         BindUI();
         BindContainers();
         BindStatistic();
+        BindSpawner();
     }
 
     private void BindUI()
@@ -35,6 +36,15 @@ public class BootstrapInstaller : MonoInstaller
         Container
             .Bind<Statistic>()
             .FromNew()
+            .AsSingle()
+            .NonLazy();
+    }
+
+    private void BindSpawner()
+    {
+        Container
+            .Bind<Spawner>()
+            .FromComponentInHierarchy()
             .AsSingle()
             .NonLazy();
     }
