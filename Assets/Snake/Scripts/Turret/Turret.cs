@@ -66,7 +66,7 @@ public class Turret : MonoBehaviour
         {
             if (enemy == null)
             {
-                _enemies.Remove(enemy);
+                // _enemies.Remove(enemy);
                 continue;
             }
 
