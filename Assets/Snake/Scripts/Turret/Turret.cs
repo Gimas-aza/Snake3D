@@ -19,12 +19,11 @@ public class Turret : MonoBehaviour
     private Head _head;
     private Attack _attack;
 
-    public void Init(Transform containerBullet, Spawner spawner)
+    public void Init(Transform containerBullet)
     {
         _containerBullet = containerBullet;
         _head = GetComponent<Head>();
         _attack = GetComponent<Attack>();
-        spawner.SpawnEnemy += OnSetEnemiesList;
     }
 
     private void Start()
@@ -43,8 +42,8 @@ public class Turret : MonoBehaviour
 
         if(_nearestEnemy != null && _shortestDistance <= _range)
         {
-            _head.Rotation(_nearestEnemy.transform);
-            _attack.Shot(_nearestEnemy.transform, _bulletList);
+            _head.Rotation(_nearestEnemy.PivotModel);
+            _attack.Shot(_nearestEnemy.PivotModel, _bulletList);
         }
         else
         {
@@ -52,7 +51,7 @@ public class Turret : MonoBehaviour
         }
     }
 
-    public void OnSetEnemiesList(List<Enemy> enemies)
+    public void SetEnemiesList(List<Enemy> enemies)
     {
         _enemies = enemies;
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class SnakeTail : MonoBehaviour
     private Spawner _spawner;
     private List<SnakeBody> _bodyParts = new();
     private List<Vector3> _positionsHistory = new();
+    private List<Enemy> _enemies = new();
 
     [Inject]
     private void Construct(Containers containers, Spawner spawner)
@@ -22,6 +24,12 @@ public class SnakeTail : MonoBehaviour
         _containerBody = containers.ContainerSnakeTail.transform;
         _containerBullet = containers.ContainerBullet.transform;
         _spawner = spawner;
+        _spawner.SpawnEnemy += OnSetEnemiesList;
+    }
+
+    private void OnDisable()
+    {
+        _spawner.SpawnEnemy -= OnSetEnemiesList;
     }
 
     private void FixedUpdate()
@@ -59,7 +67,8 @@ public class SnakeTail : MonoBehaviour
     public void AddBlock()
     {
         SnakeBody body = Instantiate(_bodyPrefab, _containerBody);
-        body.Turret.Init(_containerBullet, _spawner);
+        body.Turret.Init(_containerBullet);
+        body.Turret.SetEnemiesList(_enemies);
         _bodyParts.Add(body);
     }
 
@@ -67,5 +76,12 @@ public class SnakeTail : MonoBehaviour
     {
         Destroy(_bodyParts[0].gameObject);
         _bodyParts.RemoveAt(0);
+    }
+
+    private void OnSetEnemiesList(List<Enemy> enemies)
+    {
+        _enemies = enemies;
+        foreach (var body in _bodyParts)
+            body.Turret.SetEnemiesList(_enemies);
     }
 }

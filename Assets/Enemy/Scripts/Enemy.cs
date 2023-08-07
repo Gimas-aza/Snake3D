@@ -13,6 +13,8 @@ public class Enemy : Character
 
     public Statistic Statistic => _statistic;
 
+    public Transform PivotModel;
+
     public void Init(Snake target, Statistic statistic)
     {
         _statistic = statistic;
