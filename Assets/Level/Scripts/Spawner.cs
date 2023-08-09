@@ -7,6 +7,8 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private List<SpawnEnemy> _spawnsEnemies;
     [SerializeField] private List<SpawnBonus> _spawnsBonus;
+    [SerializeField] private SpawnSnake _spawnSnake;
+    [Space(5)]
     [SerializeField] private Snake _snake;
 
     private List<Enemy> _enemies = new();
@@ -39,6 +41,9 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if (CheckTriggerForPointSpawn(0))
+            SetSpawnSnake();
+
         if (_spawnsEnemies.Count == 0)
             return;
 
@@ -71,5 +76,29 @@ public class Spawner : MonoBehaviour
         Bonus bonus = Instantiate(prefab, spawn.SpawnPoint.position, Quaternion.identity, _containerBonus);
         bonus.Init(_snake, _statistic);
         _statistic.AddApple();
+    }
+
+    private bool CheckTriggerForPointSpawn(int index)
+    {
+        if (index == _spawnSnake.TriggerForPointsSpawns.Count) return false;
+
+        return _spawnSnake.TriggerForPointsSpawns[index] != null && _spawnSnake.TriggerForPointsSpawns[index].Included;
+    }
+
+    private void SetSpawnSnake()
+    {
+        _spawnSnake.SpawnPoint.position = _spawnSnake.TriggerForPointsSpawns[0].transform.position;
+        _spawnSnake.SpawnPoint.rotation = _spawnSnake.TriggerForPointsSpawns[0].transform.rotation;
+
+        _spawnSnake.TriggerForPointsSpawns[0].gameObject.SetActive(false);
+        _spawnSnake.TriggerForPointsSpawns.RemoveAt(0);
+    }
+
+    public void SpawnSnake()
+    {
+        if (!_spawnSnake.Prefab.TryGetComponent(out Snake prefab)) return;
+
+        prefab.transform.position = _spawnSnake.SpawnPoint.position;
+        prefab.transform.rotation = _spawnSnake.SpawnPoint.rotation;
     }
 }

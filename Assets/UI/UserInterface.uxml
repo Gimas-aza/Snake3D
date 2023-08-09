@@ -34,7 +34,8 @@
                     <ui:Label text="0/0" display-tooltip-when-elided="true" name="KilledEnemies" style="height: 100%; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-items: center; justify-content: center; display: flex; visibility: visible; overflow: visible; -unity-text-align: middle-center; font-size: 30px; color: rgb(0, 9, 88); -unity-font-style: normal; -unity-font: none; -unity-text-outline-width: 0; text-shadow: 0 0 0 rgb(0, 0, 0);" />
                 </ui:VisualElement>
             </ui:GroupBox>
-            <ui:Label text="Уровень пройден" display-tooltip-when-elided="true" name="TextLevelPassed" style="-unity-text-align: middle-center; height: 75px; width: auto; font-size: 48px; color: rgb(217, 217, 217); -unity-font-style: bold;" />
+            <ui:Label text="Уровень пройден" display-tooltip-when-elided="true" name="TextLevelPassed" style="-unity-text-align: middle-center; height: 75px; width: auto; font-size: 48px; color: rgb(217, 217, 217); -unity-font-style: bold; display: none;" />
+            <ui:Label text="Уровень не пройден" display-tooltip-when-elided="true" name="TextLevelFailed" style="-unity-text-align: middle-center; height: 75px; width: auto; font-size: 48px; color: rgb(217, 217, 217); -unity-font-style: bold; display: none;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

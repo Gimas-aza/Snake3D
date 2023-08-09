@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 public class SpawnTrigger : MonoBehaviour
 {

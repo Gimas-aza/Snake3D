@@ -30,6 +30,7 @@ public class Snake : Character
             // Instantiate(_effect, transform.position, Quaternion.identity);
             _health = 0;
             gameObject.SetActive(false);
+            SetGameOver();
         }
 
         _ui.SetHealthBar(_health);
@@ -39,5 +40,12 @@ public class Snake : Character
     {
         _health = _healthMax;
         _ui.SetHealthBar(_health);
-    } 
+    }
+
+    private void SetGameOver()
+    {
+        _ui.SetLevelPassed(false);
+        _ui.SetActiveStatistics(true);
+        Time.timeScale = 0;
+    }
 }

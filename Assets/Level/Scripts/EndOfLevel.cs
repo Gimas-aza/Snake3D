@@ -22,6 +22,7 @@ public class EndOfLevel : MonoBehaviour
     {
         if (other.TryGetComponent(out Snake snake))
         {
+            _ui.SetLevelPassed(true);
             _ui.SetActiveStatistics(true);
             Time.timeScale = 0;
         }

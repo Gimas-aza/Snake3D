@@ -14,6 +14,8 @@ public class UI : MonoBehaviour
     private VisualElement _containerStatistics;
     private Label _statisticAteOfApples;
     private Label _statisticKilledEnemies;
+    private Label _textLevelPassed;
+    private Label _textLevelFailed;
     private float _horizontal;
 
     public float Horizontal => _horizontal;
@@ -27,6 +29,8 @@ public class UI : MonoBehaviour
         _containerStatistics = _document.rootVisualElement.Q<VisualElement>("Statistics");
         _statisticAteOfApples = _containerStatistics.Q<Label>("EatenApples");
         _statisticKilledEnemies = _containerStatistics.Q<Label>("KilledEnemies");
+        _textLevelPassed = _containerStatistics.Q<Label>("TextLevelPassed");
+        _textLevelFailed = _containerStatistics.Q<Label>("TextLevelFailed");
     }
 
     private void Start()
@@ -60,5 +64,19 @@ public class UI : MonoBehaviour
     public void SetStatisticEnemies(int numberDiedEnemies, int numberEnemies)
     {
         _statisticKilledEnemies.text = numberDiedEnemies.ToString() + " / " + numberEnemies.ToString();
+    }
+
+    public void SetLevelPassed(bool isPassed)
+    {
+        if (isPassed)
+        {
+            _textLevelFailed.style.display = DisplayStyle.None;
+            _textLevelPassed.style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+            _textLevelPassed.style.display = DisplayStyle.None;
+            _textLevelFailed.style.display = DisplayStyle.Flex;
+        }
     }
 }
