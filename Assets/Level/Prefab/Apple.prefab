@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ba9b319884bd8846b28037956c3c00f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _effectEating: {fileID: 4453610176243019733, guid: b359205e2fd273241a97b961d9787ee6, type: 3}
 --- !u!1 &8487418436280509505
 GameObject:
   m_ObjectHideFlags: 0

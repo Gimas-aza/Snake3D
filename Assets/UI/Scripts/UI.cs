@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
@@ -48,7 +46,20 @@ public class UI : MonoBehaviour
 
     public void SetHealthBar(int health)
     {
-        _healthBar.text = health.ToString() + " HP";
+        if (health < Int32.Parse(_healthBar.text.Trim(new char[]  { 'H', 'P' })))
+        {
+            _healthBar.style.color = new Color(255, 0, 0);
+            _healthBar.style.fontSize = 70;
+        }
+
+        _healthBar.text = health.ToString() + " HP"; 
+        Invoke(nameof(ReturnHealthBar), 0.5f);
+    }
+
+    private void ReturnHealthBar()
+    {
+        _healthBar.style.color = new Color(0, 0, 0);
+        _healthBar.style.fontSize = 50;
     }
 
     public void SetActiveStatistics(bool isActive)
