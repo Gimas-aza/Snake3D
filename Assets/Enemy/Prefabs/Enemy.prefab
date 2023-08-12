@@ -172,7 +172,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -196,9 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba9b654dbf0ff44b83ad9984ebe3423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effect: {fileID: 0}
   _health: 20
-  _healthText: {fileID: 0}
   PivotModel: {fileID: 1548003262131590454}
 --- !u!114 &7917122803238459307
 MonoBehaviour:
@@ -259,7 +257,8 @@ MonoBehaviour:
   _radius: 3
   _delayAttack: 0.7
   _imageRadiusAttack: {fileID: 6777198234287208923}
-  _effectBlast: {fileID: 5717364506757088505, guid: 2ce5c1a989293a24ead3e7bec251125d, type: 3}
+  _effectBlast: {fileID: 8328707039834804344, guid: 2ce5c1a989293a24ead3e7bec251125d, type: 3}
+  _effectFallingDrone: {fileID: 0}
   _waitTime: 0.5
 --- !u!114 &4712822807437829541
 MonoBehaviour:

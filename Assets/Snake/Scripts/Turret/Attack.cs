@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour
     [SerializeField] private Transform[] _firePoints;
     [SerializeField] private float _fireRate;
     [SerializeField] private ParticleSystem _muzzleFlashEffect;
+    [SerializeField] private AudioSource _shotEffect;
     private int _currentBullet = 0;
     private float _countdown;
 
@@ -26,7 +27,8 @@ public class Attack : MonoBehaviour
                 bullet.transform.position = _firePoints[i].position;
                 bullet.transform.rotation = _firePoints[i].rotation;
 
-                _muzzleFlashEffect.Play();
+                _muzzleFlashEffect?.Play();
+                _shotEffect?.Play();
                 bullet.ShotBullet(target);
             }
 

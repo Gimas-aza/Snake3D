@@ -1,14 +1,16 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 public class Snake : Character
 {
-    [SerializeField] private GameObject _effect;
     [Space(5)]
     [SerializeField] private int _healthMax;
 
     private int _health;
     private UI _ui;
+
+    public UnityAction Death;
 
     [Inject]
     private void Construct(UI ui)
@@ -29,6 +31,7 @@ public class Snake : Character
         {
             // Instantiate(_effect, transform.position, Quaternion.identity);
             _health = 0;
+            Death?.Invoke();
             gameObject.SetActive(false);
             SetGameOver();
         }

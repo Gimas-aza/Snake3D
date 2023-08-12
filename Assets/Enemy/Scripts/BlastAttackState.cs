@@ -8,8 +8,9 @@ public class BlastAttackState : State
     [SerializeField] private int _damage;
     [SerializeField] private float _radius;
     [SerializeField] private float _delayAttack;
+    [Header("Visual effects")]
     [SerializeField] private Image _imageRadiusAttack;
-    [SerializeField] private ParticleSystem _effectBlast;
+    [SerializeField] private GameObject _effectBlast;
     [Header("Time animation")]
     [SerializeField] private float _waitTime;
 
@@ -63,8 +64,7 @@ public class BlastAttackState : State
         if (Vector3.Distance(transform.position, Target.transform.position) <= _radius)
             Target.TakeDamage(_damage);
         
-        var effectBlast = Instantiate(_effectBlast, transform.position, Quaternion.identity);
-        Destroy(effectBlast, 1f);
+        Instantiate(_effectBlast, transform.position, Quaternion.identity);
         _statistic.AddDiedEnemy();
         Destroy(gameObject);
     }

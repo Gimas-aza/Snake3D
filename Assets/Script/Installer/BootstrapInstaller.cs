@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,10 +8,20 @@ public class BootstrapInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        BindSnake();
         BindUI();
+        BindSpawner();
         BindContainers();
         BindStatistic();
-        BindSpawner();
+    }
+
+    private void BindSnake()
+    {
+        Container
+            .Bind<Snake>()
+            .FromComponentInHierarchy()
+            .AsSingle()
+            .NonLazy();
     }
 
     private void BindUI()

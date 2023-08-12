@@ -1,14 +1,16 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(AudioSource))]
 public class TurretBullet : MonoBehaviour
 {
-    [SerializeField] private GameObject _effect;
+    [SerializeField] private GameObject _modelBullet;
     [Space(5)]
     [SerializeField] private int _damage = 1;
     [SerializeField] private float _speed = 50;
     [SerializeField] private float _timeLife;
     
+    private AudioSource _hitMarkerEffect;
     private Transform _target;
     private Rigidbody _rigidbody;
     private float _countTime;
@@ -16,6 +18,7 @@ public class TurretBullet : MonoBehaviour
     private void Awake()
     {
         _countTime = _timeLife;
+        _hitMarkerEffect = GetComponent<AudioSource>();
     }
 
     private void Update() 
@@ -23,7 +26,7 @@ public class TurretBullet : MonoBehaviour
         if (_countTime <= 0)
         {
             _rigidbody.isKinematic = true;
-            gameObject.SetActive(false);
+            SetDeactivate();
         }
 
         _countTime -= Time.deltaTime;
@@ -38,7 +41,7 @@ public class TurretBullet : MonoBehaviour
         Vector3 direction = _target.position - transform.position;
         transform.forward = direction;
 
-        _rigidbody.isKinematic = false;
+        ShowBullet(true);
         _rigidbody.AddForce(direction * _speed, ForceMode.Impulse);
     }
 
@@ -46,10 +49,21 @@ public class TurretBullet : MonoBehaviour
     {
         if(other.TryGetComponent(out Enemy enemy))
         {
+            _hitMarkerEffect?.Play();
             enemy.TakeDamage(_damage);
-            // Instantiate(_effect, transform.position, Quaternion.identity);
         }
-        _rigidbody.isKinematic = true;
+        ShowBullet(false);
+        Invoke(nameof(SetDeactivate), 0.2f);
+    }
+
+    private void ShowBullet(bool isHide)
+    {
+        _rigidbody.isKinematic = !isHide;
+        _modelBullet.SetActive(isHide);
+    }
+
+    private void SetDeactivate()
+    {
         gameObject.SetActive(false);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bonus : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _effectEating;
+    [SerializeField] private GameObject _effectEating;
     private Snake _snake;
     private Statistic _statistic;
 
@@ -21,9 +21,14 @@ public class Bonus : MonoBehaviour
             snakeTail.AddBlock();
             _snake.RecoverHealth();
             _statistic.AddEatenApple();
-            Instantiate(_effectEating, transform.position, Quaternion.identity);
+            CreateEffect(_effectEating);
 
             Destroy(gameObject);
         }
+    }
+
+    private void CreateEffect(GameObject effect)
+    {
+        Instantiate(effect, transform.position, Quaternion.identity);
     }
 }
