@@ -1,10 +1,14 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
 public class UI : MonoBehaviour
 {
+    [SerializeField] private float _timeClicked = 0.5f;
+    [SerializeField] private float _multiplierHorizontal = 3;
+
     private UIDocument _document;
     private Label _healthBar;
     private Button _buttonLeft;
@@ -15,6 +19,7 @@ public class UI : MonoBehaviour
     private Label _textLevelPassed;
     private Label _textLevelFailed;
     private float _horizontal;
+    private Coroutine _coroutineHorizontalMovement = null;
 
     public float Horizontal => _horizontal;
 
@@ -33,16 +38,41 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-        _buttonLeft.RegisterCallback<PointerDownEvent, float>(OnButtonClick, -1f, TrickleDown.TrickleDown);
-        _buttonRight.RegisterCallback<PointerDownEvent, float>(OnButtonClick, 1f, TrickleDown.TrickleDown);
-        _buttonLeft.RegisterCallback<PointerUpEvent, float>(OnButtonClick, 0f);
-        _buttonRight.RegisterCallback<PointerUpEvent, float>(OnButtonClick, 0f);
+        _buttonLeft.RegisterCallback<PointerDownEvent, float>(OnButtonDown, -1f, TrickleDown.TrickleDown);
+        _buttonRight.RegisterCallback<PointerDownEvent, float>(OnButtonDown, 1f, TrickleDown.TrickleDown);
+        _buttonLeft.RegisterCallback<PointerUpEvent, float>(OnButtonUp, 0f);
+        _buttonRight.RegisterCallback<PointerUpEvent, float>(OnButtonUp, 0f);
     }
 
-    private void OnButtonClick<T>(T evl, float horizontal)
+    private void OnButtonDown<T>(T evl, float horizontal)
     {
-        _horizontal = horizontal;
+        if (_coroutineHorizontalMovement != null)
+            StopCoroutine(_coroutineHorizontalMovement);
+        
+        _coroutineHorizontalMovement = StartCoroutine(HorizontalMovement(horizontal));
     }
+
+    private void OnButtonUp<T>(T evl, float horizontal)
+    {
+        if (_coroutineHorizontalMovement != null)
+            StopCoroutine(_coroutineHorizontalMovement);
+        
+        _horizontal = 0;
+    }
+
+    private IEnumerator HorizontalMovement(float horizontal)
+    {
+        float multiplierSpeed = _multiplierHorizontal;
+
+        for (float i = 0; i < _timeClicked; i += Time.deltaTime)
+        {
+            _horizontal = Mathf.Lerp(_horizontal, horizontal, Time.deltaTime * multiplierSpeed);
+            multiplierSpeed += Time.deltaTime * 2f;
+            yield return new WaitForEndOfFrame();
+        }
+        _horizontal = horizontal;
+        yield return new WaitForEndOfFrame();
+    } 
 
     public void SetHealthBar(int health)
     {

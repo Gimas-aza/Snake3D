@@ -42,7 +42,7 @@ public class SnakeMove : MonoBehaviour {
         if (_ui.Horizontal == 0)
             steerDirection = Input.GetAxis("Horizontal");
         else
-            steerDirection = Mathf.Lerp(steerDirection, _ui.Horizontal, Time.fixedDeltaTime * _smoothClick);
+            steerDirection = _ui.Horizontal;
 
         transform.Rotate(Vector3.up * steerDirection * _steerSpeed * Time.fixedDeltaTime);
     }

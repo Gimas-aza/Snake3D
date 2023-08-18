@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 public class Statistic
@@ -7,13 +8,14 @@ public class Statistic
     private int _numberDiedEnemies;
     private int _numberApples;
     private int _numberEatenApples;
+    private UI _ui;
 
     public int NumberEnemies => _numberEnemies;
     public int NumberDiedEnemies => _numberDiedEnemies;
     public int NumberEatenApples => _numberEatenApples;
     public int NumberApples => _numberApples;
 
-    private UI _ui;
+    public UnityAction DeathEnemy;
 
     [Inject]
     private void Construct(UI ui)
@@ -31,6 +33,7 @@ public class Statistic
     {
         _numberDiedEnemies++;
         _ui.SetStatisticEnemies(_numberDiedEnemies, _numberEnemies);
+        DeathEnemy?.Invoke();
     }
 
     public void AddApple()

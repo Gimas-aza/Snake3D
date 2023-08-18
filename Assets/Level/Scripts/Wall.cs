@@ -1,7 +1,6 @@
 using UnityEngine;
 using Zenject;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Wall : MonoBehaviour
 {
     private Spawner _spawner;

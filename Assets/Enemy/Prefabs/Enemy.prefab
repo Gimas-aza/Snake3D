@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targetState: {fileID: 7917122803238459318}
   _lessOrMore: 0
-  _transitionRange: 1.5
+  _transitionRange: 2
 --- !u!114 &7917122803238459318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +258,6 @@ MonoBehaviour:
   _delayAttack: 0.7
   _imageRadiusAttack: {fileID: 6777198234287208923}
   _effectBlast: {fileID: 8328707039834804344, guid: 2ce5c1a989293a24ead3e7bec251125d, type: 3}
-  _effectFallingDrone: {fileID: 0}
   _waitTime: 0.5
 --- !u!114 &4712822807437829541
 MonoBehaviour:
