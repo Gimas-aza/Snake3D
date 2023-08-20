@@ -15,19 +15,10 @@ public class SnakeMove : MonoBehaviour {
         _ui = ui;
     }
 
-    private void Start()
+    private void FixedUpdate() 
     {
-    }
-
-    private void FixedUpdate() {
-
         MoveForward();
         SetTurnMove();
-    }
-
-    private void OnButtonUp(PointerUpEvent evt)
-    {
-        Debug.Log("ButtonUp");
     }
 
     private void MoveForward() 

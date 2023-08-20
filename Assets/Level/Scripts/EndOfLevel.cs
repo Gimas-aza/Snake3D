@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -10,10 +9,10 @@ public class EndOfLevel : MonoBehaviour
     [SerializeField] private AudioSource _gameOverEffect;
     [SerializeField] private AudioSource _successEffect;
     [SerializeField] private AudioSource _music;
-    [SerializeField] private List<GameObject> _levelBarriers;
+    [SerializeField] private List<Barrier> _levelBarriers;
     [SerializeField] private int _minNumberOfEnemies;
 
-    private Vector3 _openDoorPosition = new Vector3(0, -90, 0);
+    
     private bool _isOpenBarrier = false;
     private UI _ui;
     private Snake _snake;
@@ -52,7 +51,9 @@ public class EndOfLevel : MonoBehaviour
         {
             foreach (var barrier in _levelBarriers)
             {
-                barrier.transform.eulerAngles = _openDoorPosition;
+                barrier.OpenDoor();
+                barrier.SetActiveCollider(false);
+                barrier.SetActivePointer(true);
             }
             _isOpenBarrier = true;
         }

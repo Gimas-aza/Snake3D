@@ -302,6 +302,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 1782976227355540728, guid: acf5e64ded0c7b048861235a4075fd1a, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acf5e64ded0c7b048861235a4075fd1a, type: 3}
 --- !u!114 &2360889426905801250 stripped

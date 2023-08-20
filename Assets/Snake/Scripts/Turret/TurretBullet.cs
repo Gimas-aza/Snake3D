@@ -14,6 +14,7 @@ public class TurretBullet : MonoBehaviour
     private Transform _target;
     private Rigidbody _rigidbody;
     private float _countTime;
+    private Enemy _enemy;
 
     private void Awake()
     {
@@ -47,10 +48,10 @@ public class TurretBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Enemy enemy))
+        if(other.TryGetComponent(out _enemy))
         {
             _hitMarkerEffect?.Play();
-            enemy.TakeDamage(_damage);
+            _enemy.TakeDamage(_damage);
         }
         ShowBullet(false);
         Invoke(nameof(SetDeactivate), 0.2f);

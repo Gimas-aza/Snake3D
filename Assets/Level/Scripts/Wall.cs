@@ -3,6 +3,7 @@ using Zenject;
 
 public class Wall : MonoBehaviour
 {
+    private int _damage = 20;
     private Spawner _spawner;
 
     [Inject]
@@ -15,7 +16,7 @@ public class Wall : MonoBehaviour
     {
         if (other.TryGetComponent(out Snake snake))
         {
-            snake.TakeDamage(20);
+            snake.TakeDamage(_damage);
             _spawner.SpawnSnake();
         }
     }

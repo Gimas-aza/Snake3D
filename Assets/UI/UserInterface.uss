@@ -9,3 +9,7 @@
 .Fon {
     background-color: rgba(217, 217, 217, 0.5);
 }
+
+.NotActive {
+    opacity: 0.5;
+}
