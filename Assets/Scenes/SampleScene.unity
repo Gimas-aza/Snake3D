@@ -12087,6 +12087,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallArchwayShort (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1076509713815603185, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1076509713815603185, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+      propertyPath: m_Size.z
+      value: 0.9571664
+      objectReference: {fileID: 0}
+    - target: {fileID: 1076509713815603185, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+      propertyPath: m_Center.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1076509713815603185, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+      propertyPath: m_Center.z
+      value: 2.722977
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920740685981823837, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920740685981823837, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+      propertyPath: m_Size.z
+      value: 0.95716643
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920740685981823837, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+      propertyPath: m_Center.x
+      value: 0.44999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920740685981823837, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
+      propertyPath: m_Center.z
+      value: -2.7229774
+      objectReference: {fileID: 0}
     - target: {fileID: 3825608744913882045, guid: baa49d9de741a4504a24930d80ff34a9, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -15180,7 +15212,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770685970}
-  m_LocalRotation: {x: 0.20432591, y: 0.67304885, z: -0.20176977, w: 0.6815755}
+  m_LocalRotation: {x: 0.20432591, y: 0.6730488, z: -0.20176977, w: 0.68157554}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
